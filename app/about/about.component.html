@@ -1,0 +1,41 @@
+<ActionBar title="About Us" class="action-bar">
+    </ActionBar>
+    <RadSideDrawer #drawerComponent tkToggleNavButton showOverNavigation="true">
+        <ScrollView tkDrawerContent class="sidedrawer-left">
+            <StackLayout horizontalAlign="left">
+                <drawer-content></drawer-content>
+            </StackLayout>
+        </ScrollView>
+        <ScrollView orientation="vertical" tkMainContent class="page">
+            <GridLayout height="auto" class="m-5" rows="auto auto auto">
+                <StackLayout row="0">
+                    <StackLayout  class="p-10 border">
+                        <StackLayout>
+                            <Label class="h3" text="Our History"></Label>
+                            <Label class="body" text="Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.
+                            
+                            The restaurant traces its humble beginnings to The Frying Pan, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan."
+                             textWrap="true"></Label>          
+                                     
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <Label row="1" height="40" class="p-10 m-t-10 h3" text="Corporate Leadership">´</Label>
+                        <ListView row="2"  class="list-group" [items]="leaders" *ngIf="leaders">
+                                <ng-template let-leader="item">
+                                    <StackLayout  orientation="horizontal" class="list-group-item">
+                                        <Image  rowSpan="2" height="108" width="108"  
+                                            [src]="BaseURL + leader.image" class="img-circle "></Image>
+                                        <GridLayout class="list-group-item" rows="auto *" columns="*">
+                                            <StackLayout row="0">
+                                                    <Label   [text]="leader.name" class="list-group-item-heading"></Label>
+                                                    <Label    class="list-group-item-text text-uppercase" [text]="leader.designation" textWrap="true"></Label>
+                                                    <Label   class="body list-group-item-text" [text]="  leader.description" textWrap="true"></Label>   
+                                            </StackLayout>
+                                       </GridLayout>
+                                    </StackLayout>
+                                </ng-template>                        
+                            </ListView>
+            </GridLayout>
+        </ScrollView>
+    </RadSideDrawer>
