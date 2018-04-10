@@ -18,6 +18,7 @@ import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
 import{baseURL} from './shared/baseurl';
 import { PromotionService } from "./services/promotion.service";
 import { LeaderService } from "./services/leader.service";
+import { FavoriteService } from "./services/favorite.service";
 
 
 
@@ -54,6 +55,7 @@ import { LeaderService } from "./services/leader.service";
         LeaderService,
         PromotionService,
         ProcessHTTPMsgService,
+        FavoriteService,
         {provide:'BaseURL', useValue:baseURL}
     ],
     schemas: [
