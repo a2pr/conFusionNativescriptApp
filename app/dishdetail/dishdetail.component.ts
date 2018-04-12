@@ -7,7 +7,8 @@ import {ActivatedRoute,Params} from '@angular/router';
 import {RouterExtensions} from 'nativescript-angular/router';
 import 'rxjs/add/operator/switchMap';
 import { FavoriteService } from '../services/favorite.service';
-
+import {confirm} from 'ui/dialogs';
+import { Toasty } from 'nativescript-toasty';
 @Component({
     selector:'app-dishdetail',
     moduleId:module.id,
@@ -46,6 +47,8 @@ export class DishdetailComponent implements OnInit{
     addToFavorites(){
         if(!this.favorite){
             this.favorite=this.favoriteService.addFavorite(this.dish.id);
+            const toast=new Toasty('Added dish'+ this.dish.id, 'short', 'bottom');
+            toast.show();
         }
     }
     goBack():void{
