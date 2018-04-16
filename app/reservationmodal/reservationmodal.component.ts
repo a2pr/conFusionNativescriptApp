@@ -11,13 +11,13 @@ import {Page} from 'ui/page';
 })
 export class ReservationModalComponent implements OnInit {
 
-    guestArray=[1, 2, 3, 4, 5, 6];
-    guests: number;
-    isDateTime: boolean = false;
+    guestArray=[1,2,3,4,5,6];
+    guests:number;
+    isDateTime:boolean=false;
 
-    constructor(private params: ModalDialogParams,
-        private page: Page) {
 
+    constructor(private params:ModalDialogParams,
+        private page:Page){
             if(params.context === "guest") {
                 this.isDateTime = false;
             }
@@ -26,25 +26,24 @@ export class ReservationModalComponent implements OnInit {
             }
     }
 
-    ngOnInit() {
+    ngOnInit(){
+        if(this.isDateTime){
+            let datePicker:DatePicker=<DatePicker>this.page.getViewById<DatePicker>('datePicker');
 
-        if (this.isDateTime) {
-            let datePicker: DatePicker = <DatePicker>this.page.getViewById<DatePicker>('datePicker');
+            let currrentdate:Date =new Date();
+            datePicker.year =currrentdate.getFullYear();
+            datePicker.month=currrentdate.getMonth()+1;
+            datePicker.day=currrentdate.getDate();
+            datePicker.minDate=currrentdate;
+            datePicker.maxDate= new Date(2045,4,12);
 
-            let currentdate: Date = new Date();
-            datePicker.year = currentdate.getFullYear();
-            datePicker.month = currentdate.getMonth() + 1;
-            datePicker.day = currentdate.getDate();
-            datePicker.minDate = currentdate;
-            datePicker.maxDate = new Date(2045, 4, 12);
+            let timePicker:TimePicker=<TimePicker>this.page.getViewById<TimePicker>('timePicker');
+            timePicker.hour=currrentdate.getHours();
+            timePicker.minute=currrentdate.getMinutes();
 
-            let timePicker: TimePicker = <TimePicker>this.page.getViewById<TimePicker>('timePicker');
-            timePicker.hour = currentdate.getHours();
-            timePicker.minute = currentdate.getMinutes();
         }
     }
-
-    public submit() {
+    public submit(){
         if (this.isDateTime) {
             let datePicker: DatePicker = <DatePicker>this.page.getViewById<DatePicker>('datePicker');
             let selectedDate = datePicker.date;

@@ -18,6 +18,7 @@ import { AboutComponent } from "./about/about.component";
 import { FavoritesComponent } from "./favorites/favorites.component";
 import { ReservationComponent } from "./reservation/reservation.component";
 import { ReservationModalComponent } from "./reservationmodal/reservationmodal.component";
+import { CommentComponent } from "./Comment/comment.component";
 
 import { DishService } from "./services/dish.service";
 import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
@@ -61,10 +62,12 @@ import { FavoriteService } from "./services/favorite.service";
         AboutComponent,
         FavoritesComponent,
         ReservationComponent,
-        ReservationModalComponent
+        ReservationModalComponent,
+        CommentComponent
     ],
     entryComponents:[
-        ReservationModalComponent
+        ReservationModalComponent,
+        CommentComponent
     ],
     providers: [
         DishService,
