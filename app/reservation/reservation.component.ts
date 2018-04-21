@@ -5,7 +5,9 @@ import { Switch } from 'ui/switch';
 import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {ModalDialogService, ModalDialogOptions} from 'nativescript-angular/modal-dialog';
 import { ReservationModalComponent } from '../reservationmodal/reservationmodal.component';
-
+import { Page } from "ui/page";
+import { View } from "ui/core/view";
+import * as enums from "ui/enums";
 @Component({
     selector: 'app-reservation',
     moduleId: module.id,
@@ -14,11 +16,16 @@ import { ReservationModalComponent } from '../reservationmodal/reservationmodal.
 export class ReservationComponent extends DrawerPage implements OnInit {
 
     reservation: FormGroup;
-
+    showForm:boolean=true;
+    showResults:boolean=false;
+    reservationValue:null;
+    formView:View;
+    resultView:View;
     constructor(private changeDetectorRef: ChangeDetectorRef,
         private formBuilder: FormBuilder, 
         private modalService:ModalDialogService,
-        private vcRef:ViewContainerRef) {
+        private vcRef:ViewContainerRef,
+        private page: Page) {
             super(changeDetectorRef);
 
             this.reservation = this.formBuilder.group({
@@ -75,7 +82,39 @@ export class ReservationComponent extends DrawerPage implements OnInit {
 
     }
 
+    
     onSubmit() {
+        this.reservationValue=this.reservation.value;
+        this.animation();
         console.log(JSON.stringify(this.reservation.value));
+    }
+    animation(){
+        if(this.reservationValue){
+            this.formView=this.page.getViewById<View>('formView');
+            this.resultView=this.page.getViewById<View>('results');
+            
+            
+            this.formView.animate({
+                scale:{x:0,y:0},
+                opacity:0,
+                duration:5000,
+                curve:enums.AnimationCurve.easeInOut
+            })
+            .then(()=>{
+                this.showForm=false;
+                this.showResults=true;
+                this.resultView.scaleX=0;
+                this.resultView.scaleY=0;
+                this.resultView.opacity=0; 
+            }).then(()=>{
+                console.log(this.resultView);
+                this.resultView.animate({
+                    scale:{x:1,y:1},
+                    opacity:1,
+                    duration:5000,
+                    curve:enums.AnimationCurve.easeIn
+                })
+            })
+        }
     }
 }
