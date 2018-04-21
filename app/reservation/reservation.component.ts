@@ -8,6 +8,7 @@ import { ReservationModalComponent } from '../reservationmodal/reservationmodal.
 import { Page } from "ui/page";
 import { View } from "ui/core/view";
 import * as enums from "ui/enums";
+import { CouchbaseService } from '../services/couchbase.service';
 @Component({
     selector: 'app-reservation',
     moduleId: module.id,
@@ -21,11 +22,13 @@ export class ReservationComponent extends DrawerPage implements OnInit {
     reservationValue:null;
     formView:View;
     resultView:View;
+    reservations:any[];
     constructor(private changeDetectorRef: ChangeDetectorRef,
         private formBuilder: FormBuilder, 
         private modalService:ModalDialogService,
         private vcRef:ViewContainerRef,
-        private page: Page) {
+        private page: Page,
+        private couchbaseService:CouchbaseService) {
             super(changeDetectorRef);
 
             this.reservation = this.formBuilder.group({
@@ -82,11 +85,30 @@ export class ReservationComponent extends DrawerPage implements OnInit {
 
     }
 
-    
+    submitInfo(){
+        let doc=this.couchbaseService.getDocument('reservations');
+        if(doc===null){
+            this.couchbaseService.createDocument({"reservations":[]},'reservations');
+            console.log('first reservation');
+            doc=this.couchbaseService.getDocument('reservations');
+            this.reservations=doc.reservations;
+            this.reservations.push(this.reservationValue);
+            this.couchbaseService.updateDocument('reservations',{'reservations':this.reservations})
+            console.log(JSON.stringify(this.couchbaseService.getDocument('reservations')));
+        }
+        else{
+            doc=this.couchbaseService.getDocument('reservations');
+            console.log(JSON.stringify(doc))
+            this.reservations=doc.reservations;
+            this.reservations.push(this.reservationValue);
+            this.couchbaseService.updateDocument('reservations',{'reservations':this.reservations});
+            console.log(JSON.stringify(this.couchbaseService.getDocument('reservations')))
+        }
+    }
     onSubmit() {
         this.reservationValue=this.reservation.value;
+        this.submitInfo();
         this.animation();
-        console.log(JSON.stringify(this.reservation.value));
     }
     animation(){
         if(this.reservationValue){
