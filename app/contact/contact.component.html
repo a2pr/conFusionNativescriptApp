@@ -13,12 +13,18 @@
                 <StackLayout  class="p-10 border">
                     <StackLayout>
                         <Label class="h3" text="Contact Information"></Label>
-                        <Label class="body" text="121, Clear Water Bay Road" textWrap="true"></Label>          
-                        <Label class="body" text="Clear Water Bay, Kowloon" textWrap="true"></Label>          
-                        <Label class="body" text="HONG KONG" textWrap="true"></Label>          
-                        <Label class="body" text="Tel: +852 1234 5678" textWrap="true"></Label>          
-                        <Label class="body" text="Fax: +852 8765 4321" textWrap="true"></Label>          
-                        <Label class="body" text="Email:confusion@food.net" textWrap="true"></Label>          
+                        <Label class="body text-primary" text="
+                        121, Clear Water Bay Road
+                        Clear Water Bay, Kowloon
+                        HONG KONG
+                        Call: +852 1234 5678
+                        Fax: +852 8765 4321
+                        Email:confusion@food.net" textWrap="true"></Label>
+                        <GridLayout orientation="horizontal" rows="*" columns="*, *" class="m-t-20">
+                            <Button row="0" col="0" [text]="('fa-phone' | fonticon) + ' Call'" class="btn btn-rounded-sm btn-outline no-border fa "></Button>
+                            <Button row="0" col="1" [text]="('fa-envelope-o' | fonticon) + ' Email'" class="btn btn-rounded-sm btn-outline no-border fa" (tap)="sendEmail()"></Button>
+                        </GridLayout>  
+                                
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
