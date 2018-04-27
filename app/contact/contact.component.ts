@@ -2,7 +2,8 @@ import {Component,OnInit, Inject, ChangeDetectorRef} from '@angular/core';
 import {DrawerPage} from '../shared/drawer/drawer.page';
 import {TNSFontIconService} from 'nativescript-ngx-fonticon'
 import * as Email from 'nativescript-email';
-
+import * as TNSPhone from 'nativescript-phone';
+ 
 @Component({
     selector:'app-contact',
     moduleId:module.id,
@@ -32,5 +33,9 @@ export class ContactComponent extends DrawerPage {
                     console.log('No email configured')
                 }
             })
+    }
+    callRestaurant(){
+        console.log('calling');
+        TNSPhone.dial('92-93546-8999', true);
     }
 }
