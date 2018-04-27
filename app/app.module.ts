@@ -19,6 +19,7 @@ import { FavoritesComponent } from "./favorites/favorites.component";
 import { ReservationComponent } from "./reservation/reservation.component";
 import { ReservationModalComponent } from "./reservationmodal/reservationmodal.component";
 import { CommentComponent } from "./Comment/comment.component";
+import { UserAuthComponent } from "./userauth/userauth.component";
 
 import { DishService } from "./services/dish.service";
 import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
@@ -27,6 +28,8 @@ import { PromotionService } from "./services/promotion.service";
 import { LeaderService } from "./services/leader.service";
 import { FavoriteService } from "./services/favorite.service";
 import { CouchbaseService } from "./services/couchbase.service";
+import { PlatformService } from "./services/platform.service";
+
 
 
 
@@ -64,7 +67,8 @@ import { CouchbaseService } from "./services/couchbase.service";
         FavoritesComponent,
         ReservationComponent,
         ReservationModalComponent,
-        CommentComponent
+        CommentComponent,
+        UserAuthComponent
     ],
     entryComponents:[
         ReservationModalComponent,
@@ -77,6 +81,7 @@ import { CouchbaseService } from "./services/couchbase.service";
         ProcessHTTPMsgService,
         FavoriteService,
         CouchbaseService,
+        PlatformService,
         {provide:'BaseURL', useValue:baseURL}
     ],
     schemas: [
